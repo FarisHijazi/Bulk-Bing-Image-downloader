@@ -16,7 +16,7 @@ scripts = glob.glob('*.py') + glob.glob('*/*.py')
 
 setuptools.setup(
     name="bbid",  # Replace with your own username
-    version="1.0",
+    version="1.1",
     author="Gabriel Ostrolucký",
     description='Audio preprocessing script. Splits audio files to segments using subtitle files or on silences.'
                 '\nSpecifically for transcribed audio files.'

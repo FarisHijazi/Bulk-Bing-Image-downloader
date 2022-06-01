@@ -174,7 +174,10 @@ def main():
     global image_md5s
     global in_progress
     global urlopenheader
-    parser = argparse.ArgumentParser(description='Bing image bulk downloader')
+    parser = argparse.ArgumentParser(description="""Bing image bulk downloader
+    https://github.com/FarisHijazi/Bulk-Bing-Image-downloader
+    https://github.com/ostrolucky/Bulk-Bing-Image-downloader (original author)
+    """)
     parser.add_argument('search_string', nargs="+", help='Keyword to search')
     parser.add_argument('-f', '--search-file', action='store_true', help='use search-string as a path to a file containing search strings line by line',
                         required=False)
@@ -213,7 +216,10 @@ def main():
 
     
     if not args.search_file:
-        fetch_images_from_keyword(pool_sema, img_sema, args.search_string, output_dir, args.filters, args.limit)
+        keyword = args.search_string
+        output_sub_dir = os.path.join(output_dir_origin, keyword.strip().replace(' ', '_'))
+        os.makedirs(output_sub_dir, exist_ok=True)
+        fetch_images_from_keyword(pool_sema, img_sema, keyword, output_sub_dir, args.filters, args.limit)
     else:
         try:
             inputFile = open(args.search_string)
